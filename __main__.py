@@ -7,7 +7,7 @@ import uuid
 
 config = Config()
 location = config.get("location") or "westeurope"
-
+email = "wi24b100@technikum-wien.at"
 subscription_id = "64b584d9-7fa6-49e0-ae15-d41006efcf1b" # Tvoj subscription ID
 
 # 1. Resource Group
@@ -201,14 +201,14 @@ my_budget = costmanagement.Budget(
             enabled=True,
             operator="GreaterThan",
             threshold=80,
-            contact_emails=["YourEmail@example.com"],
+            contact_emails=[email],
             threshold_type="Actual"
         ),
         "Forecasted_GreaterThan_100_Percent": costmanagement.NotificationArgs(
             enabled=True,
             operator="GreaterThan",
             threshold=100,
-            contact_emails=["YourEmail@example.com"],
+            contact_emails=[email],
             threshold_type="Forecasted"
         )
     }
