@@ -63,7 +63,7 @@ pulumi.export("app_subnet_name", app_subnet.name)
 pulumi.export("endpoint_subnet_name", endpoint_subnet.name)
 
 # 3. Private DNS Zone
-# We create a private DNS zone for 'privatelink.cognitiveservices.azure.com' so that
+# Create a private DNS zone for 'privatelink.cognitiveservices.azure.com' so that
 # the Web App can resolve the Cognitive Services endpoint privately via the Private Endpoint.
 private_dns_zone = network.PrivateZone(
     "private_dns_zone",
@@ -85,7 +85,6 @@ vnet_dns_link = network.VirtualNetworkLink(
 pulumi.export("private_dns_zone_name", private_dns_zone.name)
 
 # 4. Existing Cognitive Services Account (F0) named "ass7"
-# We assume "ass7" is already in this RG and public access is disabled.
 ass7_account_name = "ass7"
 cognitive_endpoint = f"https://{ass7_account_name}.cognitiveservices.azure.com/"
 
