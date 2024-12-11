@@ -84,7 +84,7 @@ vnet_dns_link = network.VirtualNetworkLink(
 
 pulumi.export("private_dns_zone_name", private_dns_zone.name)
 
-# 4. Existing Cognitive Services Account (F0) named "ass7"
+# 4. Cognitive Services Account (F0) named "ass7" 
 ass7_account_name = "ass7"
 cognitive_endpoint = f"https://{ass7_account_name}.cognitiveservices.azure.com/"
 
@@ -133,7 +133,7 @@ cog_private_dns_zone_group = network.PrivateDnsZoneGroup(
 )
 
 # 6. App Service Plan and Web App (Python 3.9)
-# The App Service Plan (Premium tier, 3 workers) provides scalable compute.
+# The App Service Plan (Premium tier, 3 workers).
 app_service_plan = web.AppServicePlan(
     "appServicePlan",
     resource_group_name="paas-rg",
@@ -143,7 +143,7 @@ app_service_plan = web.AppServicePlan(
     sku=web.SkuDescriptionArgs(
         name="P1v2",
         tier="Premium",
-        capacity=3  # This ensures we have three workers
+        capacity=3  # Three workers
     ),
     reserved=True
 )
@@ -151,7 +151,7 @@ app_service_plan = web.AppServicePlan(
 # A fixed name for the Web App to ensure consistent URL
 web_app_name = "paas-webapp-demo-group-6"
 
-# Create the Web App using the App Service Plan and Python 3.9 runtime.
+# Creates the Web App using the App Service Plan and Python 3.9 runtime.
 web_app = web.WebApp(
     "webApp",
     resource_group_name="paas-rg",
@@ -190,9 +190,6 @@ app_settings = web.WebAppApplicationSettings(
 
 pulumi.export("web_app_url", web_app.default_host_name.apply(lambda host: f"https://{host}"))
 
-# Link the Web App to a GitHub repository to automatically fetch and deploy code.
-# We set is_manual_integration=True meaning we may need to trigger deployment manually.
-# If we wanted automatic deployment on commit, we could set is_manual_integration=False.
 web_app_source_control = web.WebAppSourceControl(
     "webAppSourceControl",
     name=web_app.name,
@@ -204,8 +201,7 @@ web_app_source_control = web.WebAppSourceControl(
     deployment_rollback_enabled=False
 )
 
-# 7. Create a Budget resource at subscription level
-# This helps control costs. The start date should be current or future month.
+# 7. Create a Budget resource 
 budget_name = f"myBudget{uuid.uuid4().hex[:8]}"
 my_budget = costmanagement.Budget(
     budget_name,
